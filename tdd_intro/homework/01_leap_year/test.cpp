@@ -16,7 +16,6 @@ If your language provides a method in the standard library that does this look-u
 
 
 
-
 TEST(LeapYear, DevidedBy4)
 {
     ASSERT_TRUE(LeapYear(4));
