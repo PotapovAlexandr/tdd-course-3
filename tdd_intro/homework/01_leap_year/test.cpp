@@ -45,3 +45,13 @@ TEST(LeapYear, DevidedBy400)
 {
     ASSERT_TRUE(LeapYear(400));
 }
+
+TEST(LeapYear, RandomYearsTest)
+{
+    ASSERT_TRUE(LeapYear(2000));
+    ASSERT_FALSE(LeapYear(1000));
+    ASSERT_TRUE(LeapYear(1996));
+    ASSERT_FALSE(LeapYear(1997));
+    ASSERT_TRUE(LeapYear(2020));
+    ASSERT_FALSE(LeapYear(2018));
+}
