@@ -36,3 +36,8 @@ TEST(LeapYear, DevidedBy100)
 {
     ASSERT_FALSE(LeapYear(100));
 }
+
+TEST(LeapYear, DevidedBy400)
+{
+    ASSERT_TRUE(LeapYear(400));
+}
