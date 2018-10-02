@@ -54,4 +54,6 @@ TEST(LeapYear, RandomYearsTest)
     ASSERT_FALSE(LeapYear(1997));
     ASSERT_TRUE(LeapYear(2020));
     ASSERT_FALSE(LeapYear(2018));
+    ASSERT_TRUE(LeapYear(-2000));
+    ASSERT_FALSE(LeapYear(-1000));
 }
