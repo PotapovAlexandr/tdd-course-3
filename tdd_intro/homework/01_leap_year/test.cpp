@@ -13,3 +13,11 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+
+
+
+TEST(LeapYear, DevidedBy4)
+{
+    ASSERT_TRUE(LeapYear(4));
+}
