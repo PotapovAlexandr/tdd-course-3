@@ -14,7 +14,13 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
-
+bool LeapYear(int year)
+{
+    if (year%4 == 0)
+    {
+        return true;
+    }
+}
 
 TEST(LeapYear, DevidedBy4)
 {
