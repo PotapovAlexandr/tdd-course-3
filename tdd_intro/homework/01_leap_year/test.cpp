@@ -20,9 +20,15 @@ bool LeapYear(int year)
     {
         return true;
     }
+    return false;
 }
 
 TEST(LeapYear, DevidedBy4)
 {
     ASSERT_TRUE(LeapYear(4));
+}
+
+TEST(LeapYear, DevidedBy100)
+{
+    ASSERT_FALSE(LeapYear(100));
 }
