@@ -19,13 +19,26 @@ If your language provides a method in the standard library to perform the conver
 
 #include <gtest/gtest.h>
 
-int DemicalView(std::string str)
+int OneSignDemicalView(const std::string& oneSign)
 {
-    if (str == "1" || str == "2" || str == "3")
+    if (oneSign == "1" || oneSign == "2" || oneSign == "0")
     {
-        return std::stoi( str );
+
+        return std::stoi( oneSign );
     }
-    return 0;
+    return -1;
+}
+
+int DemicalView(const std::string& str)
+{
+    if (str.empty())
+    {
+        return 0;
+    }
+    int answer = 0;
+    answer += OneSignDemicalView(str.substr(str.size() - 1 , 1));
+
+    return (answer > 0)? answer : 0;
 }
 
 TEST(TernaryNumbers, EmptyString)
@@ -43,7 +56,7 @@ TEST(TernaryNumbers, EqualTwo)
     ASSERT_EQ(2, DemicalView("2"));
 }
 
-TEST(TernaryNumbers, TwoCharString)
+TEST(TernaryNumbers, TwoSignString)
 {
     ASSERT_EQ(1, DemicalView("01"));
 }
