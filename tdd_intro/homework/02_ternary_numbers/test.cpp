@@ -37,3 +37,8 @@ TEST(TernaryNumbers, EqualOne)
 {
     ASSERT_EQ(1, DemicalView("1"));
 }
+
+TEST(TernaryNumbers, EqualTwo)
+{
+    ASSERT_EQ(2, DemicalView("2"));
+}
