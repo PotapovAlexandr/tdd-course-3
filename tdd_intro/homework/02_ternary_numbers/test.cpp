@@ -21,19 +21,10 @@ If your language provides a method in the standard library to perform the conver
 
 int DemicalView(std::string str)
 {
-    if (str == "1")
+    if (str == "1" || str == "2" || str == "3")
     {
-        return 1;
+        return std::stoi( str );
     }
-    if (str == "2")
-    {
-        return 2;
-    }
-    if (str == "0")
-    {
-        return 0;
-    }
-
     return 0;
 }
 
