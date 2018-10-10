@@ -36,10 +36,11 @@ int DemicalView(const std::string& str)
         return 0;
     }
     int answer = 0;
-
-    answer += OneSignDemicalView(str.substr(str.size() - 1 , 1));
-
-    return (answer > 0)? answer : 0;
+    for(size_t i = 1; i <= str.size(); ++i)
+    {
+        answer += OneSignDemicalView(str.substr(str.size() - i , 1)) * pow(3, i - 1) ;
+    }
+    return (answer > 0) ? answer : 0;
 }
 
 TEST(TernaryNumbers, EmptyString)
@@ -61,6 +62,7 @@ TEST(TernaryNumbers, TwoSignString01)
 {
     ASSERT_EQ(1, DemicalView("01"));
 }
+
 
 TEST(TernaryNumbers, TwoSignString11)
 {
