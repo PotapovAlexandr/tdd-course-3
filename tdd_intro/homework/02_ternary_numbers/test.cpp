@@ -36,6 +36,7 @@ int DemicalView(const std::string& str)
         return 0;
     }
     int answer = 0;
+
     answer += OneSignDemicalView(str.substr(str.size() - 1 , 1));
 
     return (answer > 0)? answer : 0;
@@ -56,7 +57,12 @@ TEST(TernaryNumbers, EqualTwo)
     ASSERT_EQ(2, DemicalView("2"));
 }
 
-TEST(TernaryNumbers, TwoSignString)
+TEST(TernaryNumbers, TwoSignString01)
 {
     ASSERT_EQ(1, DemicalView("01"));
+}
+
+TEST(TernaryNumbers, TwoSignString11)
+{
+    ASSERT_EQ(4, DemicalView("11"));
 }
