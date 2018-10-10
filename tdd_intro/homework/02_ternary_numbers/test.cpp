@@ -21,6 +21,10 @@ If your language provides a method in the standard library to perform the conver
 
 int DemicalView(std::string str)
 {
+    if (str == "1")
+    {
+        return 1;
+    }
     return 0;
 }
 
