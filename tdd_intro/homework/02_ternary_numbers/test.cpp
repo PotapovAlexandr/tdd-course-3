@@ -28,3 +28,8 @@ TEST(TernaryNumbers, EmptyString)
 {
     ASSERT_EQ(0, DemicalView(""));
 }
+
+TEST(TernaryNumbers, EqualOne)
+{
+    ASSERT_EQ(1, DemicalView("1"));
+}
