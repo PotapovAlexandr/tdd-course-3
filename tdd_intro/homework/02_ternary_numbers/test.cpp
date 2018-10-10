@@ -25,6 +25,15 @@ int DemicalView(std::string str)
     {
         return 1;
     }
+    if (str == "2")
+    {
+        return 2;
+    }
+    if (str == "0")
+    {
+        return 0;
+    }
+
     return 0;
 }
 
