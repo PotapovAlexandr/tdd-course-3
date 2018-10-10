@@ -42,3 +42,8 @@ TEST(TernaryNumbers, EqualTwo)
 {
     ASSERT_EQ(2, DemicalView("2"));
 }
+
+TEST(TernaryNumbers, TwoCharString)
+{
+    ASSERT_EQ(1, DemicalView("01"));
+}
