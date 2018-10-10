@@ -19,6 +19,10 @@ If your language provides a method in the standard library to perform the conver
 
 #include <gtest/gtest.h>
 
+int DemicalView(std::string str)
+{
+    return 0;
+}
 
 TEST(TernaryNumbers, EmptyString)
 {
