@@ -68,3 +68,9 @@ TEST(TernaryNumbers, TwoSignString11)
 {
     ASSERT_EQ(4, DemicalView("11"));
 }
+
+
+TEST(TernaryNumbers, SpecifcationTest)
+{
+    ASSERT_EQ(302, DemicalView("102012"));
+}
