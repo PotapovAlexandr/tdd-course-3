@@ -216,7 +216,7 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 //  assumptions:
 //   one function, take vector of Display and return vector of int
-//   second function, take 1 Display and return one int.
+//   second function, take 1 Display and return one string with 9 digit.
 //   third function, take 1 Digit and return one int.
 // No information about wrong entry*
 
@@ -276,4 +276,9 @@ TEST(Bank, EmptyDigit)
 {
     Digit emptyDigit{"", "", ""};
     ASSERT_EQ(-1, ZipNumberParser(emptyDigit));
+}
+
+TEST(Bank, LineOfZero)
+{
+    ASSERT_EQ("000000000", ZipLineParser(s_displayAll0));
 }
