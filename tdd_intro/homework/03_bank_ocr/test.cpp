@@ -212,12 +212,19 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 //   one function, take vector of Display and return vector of int
 //   second function, take 1 Display and return one int.
 //   third function, take 1 Digit and return one int.
-// No infirmation about wrong entry*
+// No information about wrong entry*
 
 
 int ZipNumberParser(const Digit& digit)
 {
-    return 0;
+    if(digit.lines[0] == s_digit0.lines[0] && digit.lines[1] == s_digit0.lines[1] && digit.lines[2] == s_digit0.lines[2])
+    {
+        return 0;
+    }
+    if(digit.lines[0] == s_digit1.lines[0] && digit.lines[1] == s_digit1.lines[1] && digit.lines[2] == s_digit1.lines[2])
+    {
+        return 1;
+    }
 }
 
 
