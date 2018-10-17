@@ -194,3 +194,28 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+// parse 1 number 0-9
+//  right numbers
+//  wrong numbers
+
+// parse line
+//  more than 27 symbols in string
+//  less than 27 symbols in string
+//  27 symbols in string
+
+// parse several structs
+
+
+
+//  assumptions:
+//   one function, take vector of Display and return vector of int
+//   second function, take 1 Display and return one int.
+//   third function, take 1 Digit and return one int.
+// No infirmation about wrong entry*
+
+
+TEST(Bank, NumberZero)
+{
+    ASSERT_EQ(0, ZipNumberParser(s_digit0));
+}
