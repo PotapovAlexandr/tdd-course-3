@@ -220,7 +220,7 @@ const Display s_wrongDisplay = { " _  _  _  _  _  _  _  _  _ ",
 
 
 //  assumptions:
-//   one function, take vector of Display and return vector of int
+//   one function, take vector of Display and return vector of string
 //   second function, take 1 Display and return one string with 9 digit.
 //   third function, take 1 Digit and return one int.
 // No information about wrong entry*
@@ -343,6 +343,17 @@ TEST(Bank, Line123456789)
 TEST(Bank, WrongDispley)
 {
     ASSERT_EQ("-1", ZipLineParser(s_wrongDisplay));
+}
+
+TEST(Bank, TwoLines)
+{
+    std::vector<Display> linesOfDisplay;
+    linesOfDisplay.push_back(s_displayAll0);
+    linesOfDisplay.push_back(s_displayAll1);
+    std::vector<std::string> answer;
+    answer.push_back("000000000");
+    answer.push_back("111111111");
+    ASSERT_EQ(answer, ZipVectorParser(linesOfDisplay));
 }
 
 
