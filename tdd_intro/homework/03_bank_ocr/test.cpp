@@ -283,19 +283,10 @@ std::string ZipLineParser(const Display& display)
 std::vector<std::string> ZipVectorParser(std::vector<Display> displays)
 {
     std::vector<std::string> answer;
-    if(displays.size() == 2)
+    for(auto disp:displays)
     {
-        answer.push_back("000000000");
-        answer.push_back("111111111");
+        answer.push_back(ZipLineParser(disp));
     }
-    else
-    {
-        answer.push_back("000000000");
-        answer.push_back("111111111");
-        answer.push_back("123456789");
-    }
-
-
     return answer;
 }
 
