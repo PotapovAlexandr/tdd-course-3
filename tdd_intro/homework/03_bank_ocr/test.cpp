@@ -215,6 +215,13 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 // No infirmation about wrong entry*
 
 
+int ZipNumberParser(const Digit& digit)
+{
+    return 0;
+}
+
+
+
 TEST(Bank, NumberZero)
 {
     ASSERT_EQ(0, ZipNumberParser(s_digit0));
