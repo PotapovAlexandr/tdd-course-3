@@ -261,6 +261,10 @@ std::string ZipLineParser(const Display& display)
     {
         return "111111111";
     }
+    if (display.lines[0] == s_displayAll2.lines[0] && display.lines[1] == s_displayAll2.lines[1] && display.lines[2] == s_displayAll2.lines[2] )
+    {
+        return "222222222";
+    }
     return "000000000";
 }
 
