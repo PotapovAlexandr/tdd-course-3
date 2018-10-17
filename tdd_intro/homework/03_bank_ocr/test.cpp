@@ -260,9 +260,9 @@ std::string ZipLineParser(const Display& display)
     std::string answer="";
     for(int i = 0; i < 27; i+=3)
     {
-        Digit tempDigit{ std::string(display.lines[0].begin(),display.lines[0].begin()+3),
-                         std::string(display.lines[1].begin(),display.lines[1].begin()+3),
-                         std::string(display.lines[2].begin(),display.lines[2].begin()+3)};
+        Digit tempDigit{ std::string(display.lines[0].begin() + i,display.lines[0].begin()+3 + i),
+                         std::string(display.lines[1].begin() + i,display.lines[1].begin()+3 + i),
+                         std::string(display.lines[2].begin() + i,display.lines[2].begin()+3 + i)};
         int temp = ZipNumberParser(tempDigit);
         if(temp == -1)
         {
