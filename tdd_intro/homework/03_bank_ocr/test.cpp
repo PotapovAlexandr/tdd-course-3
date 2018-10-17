@@ -379,5 +379,16 @@ TEST(Bank, ThreeLines)
     ASSERT_EQ(answer, ZipVectorParser(linesOfDisplay));
 }
 
-
+TEST(Bank, ThreeLinesWithWrongDisplay)
+{
+    std::vector<Display> linesOfDisplay;
+    linesOfDisplay.push_back(s_displayAll0);
+    linesOfDisplay.push_back(s_wrongDisplay);
+    linesOfDisplay.push_back(s_display123456789);
+    std::vector<std::string> answer;
+    answer.push_back("000000000");
+    answer.push_back("-1");
+    answer.push_back("123456789");
+    ASSERT_EQ(answer, ZipVectorParser(linesOfDisplay));
+}
 
