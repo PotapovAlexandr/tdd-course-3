@@ -296,3 +296,11 @@ TEST(Bank, emptyDisplay)
     Display emptyDisplay{"", "", ""};
     ASSERT_EQ("-1", ZipLineParser(emptyDisplay));
 }
+
+TEST(Bank, largeDisplay)
+{
+    Display largeDisplay{"______________________________",
+                         "___________________________",
+                         "___________________________"};
+    ASSERT_EQ("-1", ZipLineParser(largeDisplay));
+}
