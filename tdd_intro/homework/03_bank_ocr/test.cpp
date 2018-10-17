@@ -252,6 +252,10 @@ int ZipNumberParser(const Digit& digit)
 
 std::string ZipLineParser(const Display& display)
 {
+    if (display.lines[0].size() != 27 || display.lines[1].size() != 27 || display.lines[2].size() != 27)
+    {
+        return "-1";
+    }
     return "000000000";
 }
 
