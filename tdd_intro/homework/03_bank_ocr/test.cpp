@@ -271,3 +271,9 @@ TEST(Bank, WrongNumber)
 {
     ASSERT_EQ(-1, ZipNumberParser(s_noDigit));
 }
+
+TEST(Bank, EmptyDigit)
+{
+    Digit emptyDigit{"", "", ""};
+    ASSERT_EQ(-1, ZipNumberParser(emptyDigit));
+}
