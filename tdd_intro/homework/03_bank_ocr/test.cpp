@@ -364,5 +364,18 @@ TEST(Bank, TwoLines)
     ASSERT_EQ(answer, ZipVectorParser(linesOfDisplay));
 }
 
+TEST(Bank, ThreeLines)
+{
+    std::vector<Display> linesOfDisplay;
+    linesOfDisplay.push_back(s_displayAll0);
+    linesOfDisplay.push_back(s_displayAll1);
+    linesOfDisplay.push_back(s_display123456789);
+    std::vector<std::string> answer;
+    answer.push_back("000000000");
+    answer.push_back("111111111");
+    answer.push_back("123456789");
+    ASSERT_EQ(answer, ZipVectorParser(linesOfDisplay));
+}
+
 
 
