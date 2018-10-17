@@ -286,3 +286,8 @@ TEST(Bank, LineOfZero)
 {
     ASSERT_EQ("000000000", ZipLineParser(s_displayAll0));
 }
+
+TEST(Bank, LineOfOne)
+{
+    ASSERT_EQ("111111111", ZipLineParser(s_displayAll1));
+}
