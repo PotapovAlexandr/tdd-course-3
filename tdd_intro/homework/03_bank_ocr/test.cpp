@@ -250,6 +250,10 @@ int ZipNumberParser(const Digit& digit)
     return -1;
 }
 
+std::string ZipLineParser(const Display& display)
+{
+    return "000000000";
+}
 
 
 TEST(Bank, NumberZero)
