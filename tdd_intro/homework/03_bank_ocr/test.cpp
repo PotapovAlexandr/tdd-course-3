@@ -214,14 +214,18 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 //   third function, take 1 Digit and return one int.
 // No information about wrong entry*
 
+bool CompareDigits(const Digit& left, const Digit& right)
+{
+    return left.lines[0] == right.lines[0] && left.lines[1] == right.lines[1] && left.lines[2] == right.lines[2];
+}
 
 int ZipNumberParser(const Digit& digit)
 {
-    if(digit.lines[0] == s_digit0.lines[0] && digit.lines[1] == s_digit0.lines[1] && digit.lines[2] == s_digit0.lines[2])
+    if( CompareDigits(digit, s_digit0) )
     {
         return 0;
     }
-    if(digit.lines[0] == s_digit1.lines[0] && digit.lines[1] == s_digit1.lines[1] && digit.lines[2] == s_digit1.lines[2])
+    if( CompareDigits(digit, s_digit1) )
     {
         return 1;
     }
