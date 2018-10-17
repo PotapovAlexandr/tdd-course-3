@@ -230,6 +230,10 @@ int ZipNumberParser(const Digit& digit)
     {
         return 1;
     }
+    if( CompareDigits(digit, s_digit3) )
+    {
+        return 3;
+    }
 }
 
 
