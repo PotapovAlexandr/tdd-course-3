@@ -200,6 +200,10 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+const Display s_wrongDisplay = { " _  _  _  _  _  _  _  _  _ ",
+                                 "|_||_||_||_||_||_||_||_||_|",
+                                 " _| _| _| _  _| _| _| _| _|"
+};
 
 // parse 1 number 0-9
 //  right numbers
@@ -335,5 +339,11 @@ TEST(Bank, Line123456789)
 {
     ASSERT_EQ("123456789", ZipLineParser(s_display123456789));
 }
+
+TEST(Bank, WrongDispley)
+{
+    ASSERT_EQ("-1", ZipLineParser(s_wrongDisplay));
+}
+
 
 
