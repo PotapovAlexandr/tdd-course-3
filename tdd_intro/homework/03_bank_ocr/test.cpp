@@ -86,6 +86,7 @@ Example input and output
 */
 #include <gtest/gtest.h>
 #include <string>
+#include <vector>
 
 const unsigned short g_linesInDigit = 3;
 struct Digit
@@ -241,4 +242,9 @@ TEST(Bank, NumberZero)
 TEST(Bank, NumberOne)
 {
     ASSERT_EQ(1, ZipNumberParser(s_digit1));
+}
+
+TEST(Bank, NumberThree)
+{
+    ASSERT_EQ(3, ZipNumberParser(s_digit3));
 }
