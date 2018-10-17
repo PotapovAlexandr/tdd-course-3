@@ -226,3 +226,8 @@ TEST(Bank, NumberZero)
 {
     ASSERT_EQ(0, ZipNumberParser(s_digit0));
 }
+
+TEST(Bank, NumberOne)
+{
+    ASSERT_EQ(1, ZipNumberParser(s_digit1));
+}
