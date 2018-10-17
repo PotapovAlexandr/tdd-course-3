@@ -87,6 +87,7 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
+#include <iterator>
 
 const unsigned short g_linesInDigit = 3;
 struct Digit
@@ -222,18 +223,27 @@ bool CompareDigits(const Digit& left, const Digit& right)
 
 int ZipNumberParser(const Digit& digit)
 {
-    if( CompareDigits(digit, s_digit0) )
+    std::vector<Digit> allNumbers;
+    allNumbers.reserve(10);
+    allNumbers.push_back(s_digit0);
+    allNumbers.push_back(s_digit1);
+    allNumbers.push_back(s_digit2);
+    allNumbers.push_back(s_digit3);
+    allNumbers.push_back(s_digit4);
+    allNumbers.push_back(s_digit5);
+    allNumbers.push_back(s_digit6);
+    allNumbers.push_back(s_digit7);
+    allNumbers.push_back(s_digit8);
+    allNumbers.push_back(s_digit9);
+
+    for (int i = 0; i < allNumbers.size(); ++i)
     {
-        return 0;
+        if ( CompareDigits(digit, allNumbers[i]) )
+        {
+            return i;
+        }
     }
-    if( CompareDigits(digit, s_digit1) )
-    {
-        return 1;
-    }
-    if( CompareDigits(digit, s_digit3) )
-    {
-        return 3;
-    }
+    return -1;
 }
 
 
