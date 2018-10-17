@@ -278,7 +278,7 @@ TEST(Bank, WrongNumber)
 
 TEST(Bank, EmptyDigit)
 {
-    Digit emptyDigit{"", "", ""};
+    const Digit emptyDigit{"", "", ""};
     ASSERT_EQ(-1, ZipNumberParser(emptyDigit));
 }
 
@@ -287,7 +287,8 @@ TEST(Bank, LineOfZero)
     ASSERT_EQ("000000000", ZipLineParser(s_displayAll0));
 }
 
-TEST(Bank, LineOfOne)
+TEST(Bank, emptyDisplay)
 {
-    ASSERT_EQ("111111111", ZipLineParser(s_displayAll1));
+    Display emptyDisplay{"", "", ""};
+    ASSERT_EQ("-1", ZipLineParser(emptyDisplay));
 }
