@@ -330,3 +330,10 @@ TEST(Bank, LineOf2)
 {
     ASSERT_EQ("222222222", ZipLineParser(s_displayAll2));
 }
+
+TEST(Bank, Line123456789)
+{
+    ASSERT_EQ("123456789", ZipLineParser(s_display123456789));
+}
+
+
