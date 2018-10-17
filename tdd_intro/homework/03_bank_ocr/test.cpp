@@ -204,6 +204,7 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 // parse 1 number 0-9
 //  right numbers
 //  wrong numbers
+//  empty digit
 
 // parse line
 //  more than 27 symbols in string
@@ -303,4 +304,8 @@ TEST(Bank, largeDisplay)
                          "___________________________",
                          "___________________________"};
     ASSERT_EQ("-1", ZipLineParser(largeDisplay));
+}
+TEST(Bank, LineOf1)
+{
+    ASSERT_EQ("111111111", ZipLineParser(s_displayAll1));
 }
