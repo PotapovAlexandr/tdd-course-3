@@ -280,6 +280,14 @@ std::string ZipLineParser(const Display& display)
     return answer;
 }
 
+std::vector<std::string> ZipVectorParser(std::vector<Display> displays)
+{
+    std::vector<std::string> answer;
+    answer.push_back("000000000");
+    answer.push_back("111111111");
+    return answer;
+}
+
 
 TEST(Bank, NumberZero)
 {
