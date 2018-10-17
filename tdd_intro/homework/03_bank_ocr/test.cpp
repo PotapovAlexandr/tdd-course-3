@@ -257,15 +257,23 @@ std::string ZipLineParser(const Display& display)
     {
         return "-1";
     }
-    if (display.lines[0] == s_displayAll1.lines[0] && display.lines[1] == s_displayAll1.lines[1] && display.lines[2] == s_displayAll1.lines[2] )
+    std::string answer="";
+    for(int i = 0; i < 27; i+=3)
     {
-        return "111111111";
+        Digit tempDigit{ std::string(display.lines[0].begin(),display.lines[0].begin()+3),
+                         std::string(display.lines[1].begin(),display.lines[1].begin()+3),
+                         std::string(display.lines[2].begin(),display.lines[2].begin()+3)};
+        int temp = ZipNumberParser(tempDigit);
+        if(temp == -1)
+        {
+            return "-1";
+        }
+        else
+        {
+            answer = answer + std::to_string(temp);
+        }
     }
-    if (display.lines[0] == s_displayAll2.lines[0] && display.lines[1] == s_displayAll2.lines[1] && display.lines[2] == s_displayAll2.lines[2] )
-    {
-        return "222222222";
-    }
-    return "000000000";
+    return answer;
 }
 
 
