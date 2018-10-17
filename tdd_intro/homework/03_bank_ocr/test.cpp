@@ -141,6 +141,10 @@ const Digit s_digit9 = { " _ ",
                          "|_|",
                          " _|"
                        };
+const Digit s_noDigit = { " _ ",
+                          "|_|",
+                          " _ "
+                        };
 
 const Display s_displayAll0 = { " _  _  _  _  _  _  _  _  _ ",
                                 "| || || || || || || || || |",
@@ -261,4 +265,9 @@ TEST(Bank, NumberOne)
 TEST(Bank, NumberThree)
 {
     ASSERT_EQ(3, ZipNumberParser(s_digit3));
+}
+
+TEST(Bank, WrongNumber)
+{
+    ASSERT_EQ(-1, ZipNumberParser(s_noDigit));
 }
