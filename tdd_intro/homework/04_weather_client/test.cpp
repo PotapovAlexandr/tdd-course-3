@@ -136,15 +136,8 @@ FakeServer g_fakeServer;
 
 std::string ParseTemperature(std::string text)
 {
-    if (text == "21;181;5.1")
-    {
-        return "21";
-    }
-    if (text == "20;181;5.1")
-    {
-        return "20";
-    }
-    return "";
+    std::size_t pos = text.find(";");      // position of "live" in str
+    return text.substr (0, pos);
 }
 
 class WeatherClient: public IWeatherClient
@@ -220,3 +213,4 @@ TEST (Weather, ParseTemp20)
 {
     ASSERT_EQ("20", ParseTemperature("20;181;5.1"));
 }
+
