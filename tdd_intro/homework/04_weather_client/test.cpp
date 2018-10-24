@@ -198,14 +198,18 @@ public:
     }
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        if (date == "01.09.2018")
+        double answer = 0;
+        std::string at3 =  GetWindSpeedAtTime(server, date, ";03:00");
+        std::string at9 =  GetWindSpeedAtTime(server, date, ";09:00");
+        std::string at15 = GetWindSpeedAtTime(server, date, ";15:00");
+        std::string at21 = GetWindSpeedAtTime(server, date, ";21:00");
+        if (!at3.empty() && !at9.empty() && !at15.empty() && !at21.empty())
         {
-            return 4.2;
+            answer = std::max(atof(at3.c_str()), atof(at9.c_str()));
+            answer = std::max(answer, atof(at15.c_str()));
+            answer = std::max(answer, atof(at21.c_str()));
         }
-        if (date == "02.09.2018")
-        {
-            return 4.0;
-        }
+        return answer;
     }
 private:
     std::string GetTemperatureAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
