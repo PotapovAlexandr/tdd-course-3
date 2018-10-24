@@ -134,6 +134,8 @@ private:
 
 FakeServer g_fakeServer;
 
+
+
 class WeatherClient: public IWeatherClient
 {
 public:
@@ -172,7 +174,7 @@ public:
 private:
     std::string GetTemperatureAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
     {
-        return server.GetWeather(date + time); ;
+        return server.GetWeather(date + time);
     }
 };
 
@@ -198,3 +200,7 @@ TEST (Weather, AverageTemperature_02_09 )
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
 }
 
+TEST (Weather, ParseTemp)
+{
+    ASSERT_EQ("21", ParceTemperature("20;181;5.1"));
+}
