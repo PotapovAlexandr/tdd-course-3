@@ -274,3 +274,10 @@ TEST (Weather, MaxTemperature_2_09 )
     WeatherClient wClient;
     ASSERT_EQ(max, wClient.GetMaximumTemperature(g_fakeServer, "02.09.2018"));
 }
+
+TEST (Weather, AverageWindDir_01_09 )
+{
+    double average = (131 + 109 + 127 + 176)/4. ;
+    WeatherClient wClient;
+    ASSERT_EQ(average, wClient.GetAverageWindDirection(g_fakeServer, "01.09.2018"));
+}
