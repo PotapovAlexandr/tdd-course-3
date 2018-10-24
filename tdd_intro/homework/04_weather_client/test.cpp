@@ -167,11 +167,21 @@ public:
             answer = std::min(answer, atof(at21.c_str()));
         }
         return answer;
-
     }
     double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 31;
+        double answer = 0;
+        std::string at3 =  GetTemperatureAtTime(server, date, ";03:00");
+        std::string at9 =  GetTemperatureAtTime(server, date, ";09:00");
+        std::string at15 = GetTemperatureAtTime(server, date, ";15:00");
+        std::string at21 = GetTemperatureAtTime(server, date, ";21:00");
+        if (!at3.empty() && !at9.empty() && !at15.empty() && !at21.empty())
+        {
+            answer = std::max(atof(at3.c_str()), atof(at9.c_str()));
+            answer = std::max(answer, atof(at15.c_str()));
+            answer = std::max(answer, atof(at21.c_str()));
+        }
+        return answer;
     }
     double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
