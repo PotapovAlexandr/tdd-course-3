@@ -185,7 +185,7 @@ public:
     }
     double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        return 135.75;
     }
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
