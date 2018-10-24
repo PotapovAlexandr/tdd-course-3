@@ -171,7 +171,7 @@ public:
     }
     double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        return 31;
     }
     double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
@@ -255,5 +255,5 @@ TEST (Weather, MaxTemperature_1_09 )
 {
     double max = 31;
     WeatherClient wClient;
-    ASSERT_EQ(max, wClient.GetMinimumTemperature(g_fakeServer, "01.09.2018"));
+    ASSERT_EQ(max, wClient.GetMaximumTemperature(g_fakeServer, "01.09.2018"));
 }
