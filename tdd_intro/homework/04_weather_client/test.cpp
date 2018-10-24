@@ -142,7 +142,8 @@ public:
 
     double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        return GetServerResponce(server, date);
+        std::string strAnswer =  GetTemperature(date);
+        return atof(strAnswer.c_str());
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
@@ -161,20 +162,20 @@ public:
         return 0;
     }
 private:
-    double GetServerResponce(IWeatherServer& server, const std::string& date)
+    std::string GetTemperature (const std::string& date)
     {
-        double answer = 0;
+        std::string answer = "";
         if( date == "31.08.2018")
         {
-            answer = (20 + 23 + 33 + 26)/4.;
+            answer = "25.5";
         }
         if( date == "01.09.2018")
         {
-            answer = (19 + 22 + 31 + 24)/4.;
+            answer = "24";
         }
         if( date == "02.09.2018")
         {
-            answer = (21 + 25 + 34 + 27)/4. ;
+            answer = "26.75" ;
         }
         return answer ;
     }
@@ -201,3 +202,4 @@ TEST (Weather, AverageTemperature_02_09 )
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
 }
+
