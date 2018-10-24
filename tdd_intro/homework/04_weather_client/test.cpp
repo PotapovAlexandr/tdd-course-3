@@ -142,7 +142,9 @@ std::string ParseTemperature(std::string text)
 
 std::string ParseWindDir(std::string text)
 {
-    return "181";
+    std::size_t startPos = text.find(";");
+    std::size_t size = text.substr(startPos + 1).find(";");
+    return text.substr(startPos + 1, size);
 }
 
 class WeatherClient: public IWeatherClient
