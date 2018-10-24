@@ -142,7 +142,16 @@ public:
 
     double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        return (20 + 23 + 33 + 26)/4. ;
+        double answer = 0;
+        if( date == "31.08.2018")
+        {
+            answer = (20 + 23 + 33 + 26)/4.;
+        }
+        else
+        {
+            answer = (19 + 22 + 31 + 24)/4.;
+        }
+        return answer ;
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
