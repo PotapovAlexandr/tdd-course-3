@@ -132,11 +132,12 @@ private:
     std::map<std::string, std::string> m_answers;
 };
 
+FakeServer g_fakeServer;
 
 
 TEST (Weather, AverageTemperature_31_08 )
 {
     double average = (20 + 23 + 33 + 26)/4. ;
     WeatherClient wClient;
-    ASSERT_QE(average, wClient.GetAverageTemperature("31.08.2018"));
+    ASSERT_QE(average, wClient.GetAverageTemperature(g_fakeServer, "31.08.2018"));
 }
