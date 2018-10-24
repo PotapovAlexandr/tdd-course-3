@@ -97,3 +97,37 @@ public:
    GetMaximumWindSpeed
 
   */
+
+class FakeServer : public IWeatherServer
+{
+public:
+    FakeServer()
+    {
+        m_answers["31.08.2018;03:00"] = "20;181;5.1";
+        m_answers["31.08.2018;09:00"] = "23;204;4.9";
+        m_answers["31.08.2018;15:00"] = "33;193;4.3";
+        m_answers["31.08.2018;21:00"] = "26;179;4.5";
+
+        m_answers["01.09.2018;03:00"] = "19;176;4.2";
+        m_answers["01.09.2018;09:00"] = "22;131;4.1";
+        m_answers["01.09.2018;15:00"] = "31;109;4.0";
+        m_answers["01.09.2018;21:00"] = "24;127;4.1";
+
+        m_answers["02.09.2018;03:00"] = "21;158;3.8";
+        m_answers["02.09.2018;09:00"] = "25;201;3.5";
+        m_answers["02.09.2018;15:00"] = "34;258;3.7";
+        m_answers["02.09.2018;21:00"] = "27;299;4.0";
+    }
+    std::string GetWeather(const std::string& request)
+    {
+        std::string answer = "";
+        auto it = m_answers.find(request);
+        if(it != m_answers.end())
+        {
+            answer = m_answers[request];
+        }
+        return answer;
+    }
+private:
+    std::map<std::string, std::string> m_answers;
+};
