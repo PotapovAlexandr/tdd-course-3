@@ -197,7 +197,7 @@ public:
     }
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        return 4.2;
     }
 private:
     std::string GetTemperatureAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
