@@ -230,3 +230,8 @@ TEST (Weather, ParseWindDir20)
 {
     ASSERT_EQ("20", ParseWindDir("20;20;5.1"));
 }
+
+TEST (Weather, ParseWindSpeed5_1)
+{
+    ASSERT_EQ("5.1", ParseWindSpeed("20;20;5.1"));
+}
