@@ -308,3 +308,10 @@ TEST (Weather, AverageWindDir_02_09 )
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageWindDirection(g_fakeServer, "02.09.2018"));
 }
+
+TEST (Weather, MaximumWindSpeed_01_09 )
+{
+    double max = 4.2;
+    WeatherClient wClient;
+    ASSERT_EQ(max, wClient.GetMaximumWindSpeed(g_fakeServer, "01.09.2018"));
+}
