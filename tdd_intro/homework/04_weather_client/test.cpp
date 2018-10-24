@@ -155,14 +155,19 @@ public:
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
-        if (date == "01.09.2018")
+        double answer = 0;
+        std::string at3 =  GetTemperatureAtTime(server, date, ";03:00");
+        std::string at9 =  GetTemperatureAtTime(server, date, ";09:00");
+        std::string at15 = GetTemperatureAtTime(server, date, ";15:00");
+        std::string at21 = GetTemperatureAtTime(server, date, ";21:00");
+        if (!at3.empty() && !at9.empty() && !at15.empty() && !at21.empty())
         {
-            return 19;
+            answer = std::min(atof(at3.c_str()), atof(at9.c_str()));
+            answer = std::min(answer, atof(at15.c_str()));
+            answer = std::min(answer, atof(at21.c_str()));
         }
-        if (date == "02.09.2018")
-        {
-            return 21;
-        }
+        return answer;
+
     }
     double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
