@@ -281,3 +281,10 @@ TEST (Weather, AverageWindDir_01_09 )
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageWindDirection(g_fakeServer, "01.09.2018"));
 }
+
+TEST (Weather, AverageWindDir_02_09 )
+{
+    double average = (158 + 201 + 258 + 299)/4. ;
+    WeatherClient wClient;
+    ASSERT_EQ(average, wClient.GetAverageWindDirection(g_fakeServer, "02.09.2018"));
+}
