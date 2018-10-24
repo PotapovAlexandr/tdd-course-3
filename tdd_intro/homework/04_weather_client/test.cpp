@@ -134,26 +134,6 @@ private:
 
 FakeServer g_fakeServer;
 
-std::string ParseTemperature(std::string text)
-{
-    std::size_t pos = text.find(";");
-    return text.substr (0, pos);
-}
-
-std::string ParseWindDir(std::string text)
-{
-    std::size_t startPos = text.find(";");
-    std::size_t size = text.substr(startPos + 1).find(";");
-    return text.substr(startPos + 1, size);
-}
-
-std::string ParseWindSpeed(std::string text)
-{
-    std::size_t startPos = text.find(";");
-    std::size_t size = text.substr(startPos + 1).find(";");
-    return text.substr(startPos + size + 2);
-}
-
 class WeatherClient: public IWeatherClient
 {
 public:
@@ -192,7 +172,34 @@ public:
 private:
     std::string GetTemperatureAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
     {
-        return server.GetWeather(date + time);
+        std::string response = server.GetWeather(date + time);
+        if (response.empty())
+        {
+            return "";
+        }
+        else
+        {
+            return ParseTemperature(response);
+        }
+    }
+    std::string ParseTemperature(std::string text)
+    {
+        std::size_t pos = text.find(";");
+        return text.substr (0, pos);
+    }
+
+    std::string ParseWindDir(std::string text)
+    {
+        std::size_t startPos = text.find(";");
+        std::size_t size = text.substr(startPos + 1).find(";");
+        return text.substr(startPos + 1, size);
+    }
+
+    std::string ParseWindSpeed(std::string text)
+    {
+        std::size_t startPos = text.find(";");
+        std::size_t size = text.substr(startPos + 1).find(";");
+        return text.substr(startPos + size + 2);
     }
 };
 
@@ -216,34 +223,4 @@ TEST (Weather, AverageTemperature_02_09 )
     double average = (21 + 25 + 34 + 27)/4. ;
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
-}
-
-TEST (Weather, ParseTemp21)
-{
-    ASSERT_EQ("21", ParseTemperature("21;181;5.1"));
-}
-
-TEST (Weather, ParseTemp20)
-{
-    ASSERT_EQ("20", ParseTemperature("20;181;5.1"));
-}
-
-TEST (Weather, ParseWindDir181)
-{
-    ASSERT_EQ("181", ParseWindDir("20;181;5.1"));
-}
-
-TEST (Weather, ParseWindDir20)
-{
-    ASSERT_EQ("20", ParseWindDir("20;20;5.1"));
-}
-
-TEST (Weather, ParseWindSpeed5_1)
-{
-    ASSERT_EQ("5.1", ParseWindSpeed("20;20;5.1"));
-}
-
-TEST (Weather, ParseWindSpeed5)
-{
-    ASSERT_EQ("5", ParseWindSpeed("20;20;5"));
 }
