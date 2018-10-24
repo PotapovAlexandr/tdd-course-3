@@ -257,3 +257,10 @@ TEST (Weather, MaxTemperature_1_09 )
     WeatherClient wClient;
     ASSERT_EQ(max, wClient.GetMaximumTemperature(g_fakeServer, "01.09.2018"));
 }
+
+TEST (Weather, MaxTemperature_2_09 )
+{
+    double max = 34;
+    WeatherClient wClient;
+    ASSERT_EQ(max, wClient.GetMaximumTemperature(g_fakeServer, "02.09.2018"));
+}
