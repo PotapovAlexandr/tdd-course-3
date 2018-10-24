@@ -134,10 +134,38 @@ private:
 
 FakeServer g_fakeServer;
 
+class WeatherClient: public IWeatherClient
+{
+public:
+    WeatherClient()
+    {}
+
+    double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return (20 + 23 + 33 + 26)/4. ;
+    }
+    double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+};
+
 
 TEST (Weather, AverageTemperature_31_08 )
 {
     double average = (20 + 23 + 33 + 26)/4. ;
     WeatherClient wClient;
-    ASSERT_QE(average, wClient.GetAverageTemperature(g_fakeServer, "31.08.2018"));
+    ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "31.08.2018"));
 }
