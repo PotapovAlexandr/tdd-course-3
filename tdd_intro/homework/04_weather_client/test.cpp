@@ -185,3 +185,10 @@ TEST (Weather, AverageTemperature_01_09 )
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "01.09.2018"));
 }
+
+TEST (Weather, AverageTemperature_02_09 )
+{
+    double average = (21 + 25 + 34 + 27)/4. ;
+    WeatherClient wClient;
+    ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
+}
