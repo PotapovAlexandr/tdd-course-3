@@ -203,7 +203,12 @@ TEST (Weather, AverageTemperature_02_09 )
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
 }
 
-TEST (Weather, ParseTemp)
+TEST (Weather, ParseTemp21)
 {
-    ASSERT_EQ("21", ParseTemperature("20;181;5.1"));
+    ASSERT_EQ("21", ParseTemperature("21;181;5.1"));
+}
+
+TEST (Weather, ParseTemp20)
+{
+    ASSERT_EQ("20", ParseTemperature("20;181;5.1"));
 }
