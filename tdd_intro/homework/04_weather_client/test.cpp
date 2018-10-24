@@ -142,20 +142,7 @@ public:
 
     double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        double answer = 0;
-        if( date == "31.08.2018")
-        {
-            answer = (20 + 23 + 33 + 26)/4.;
-        }
-        if( date == "01.09.2018")
-        {
-            answer = (19 + 22 + 31 + 24)/4.;
-        }
-        if( date == "02.09.2018")
-        {
-            answer = (21 + 25 + 34 + 27)/4. ;
-        }
-        return answer ;
+        return GetServerResponce(server, date);
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
@@ -172,6 +159,24 @@ public:
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
         return 0;
+    }
+private:
+    double GetServerResponce(IWeatherServer& server, const std::string& date)
+    {
+        double answer = 0;
+        if( date == "31.08.2018")
+        {
+            answer = (20 + 23 + 33 + 26)/4.;
+        }
+        if( date == "01.09.2018")
+        {
+            answer = (19 + 22 + 31 + 24)/4.;
+        }
+        if( date == "02.09.2018")
+        {
+            answer = (21 + 25 + 34 + 27)/4. ;
+        }
+        return answer ;
     }
 };
 
