@@ -185,15 +185,16 @@ public:
     }
     double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
-        if (date == "01.09.2018")
+        double answer = 0;
+        std::string at3 =  GetWindDirAtTime(server, date, ";03:00");
+        std::string at9 =  GetWindDirAtTime(server, date, ";09:00");
+        std::string at15 = GetWindDirAtTime(server, date, ";15:00");
+        std::string at21 = GetWindDirAtTime(server, date, ";21:00");
+        if (!at3.empty() && !at9.empty() && !at15.empty() && !at21.empty())
         {
-            return 135.75;
+            answer = ( atof(at3.c_str()) + atof(at9.c_str()) + atof(at15.c_str()) + atof(at21.c_str()) )/4;
         }
-        if (date == "02.09.2018")
-        {
-            return 229;
-        }
-        return 0;
+        return answer;
     }
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
@@ -219,7 +220,7 @@ private:
             return ParseTemperature(response);
         }
     }
-    std::string GetWindAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
+    std::string GetWindDirAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
     {
         std::string response = server.GetWeather(date + time);
         if (response.empty())
@@ -229,6 +230,18 @@ private:
         else
         {
             return ParseWindDir(response);
+        }
+    }
+    std::string GetWindSpeedAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
+    {
+        std::string response = server.GetWeather(date + time);
+        if (response.empty())
+        {
+            return "";
+        }
+        else
+        {
+            return ParseWindSpeed(response);
         }
     }
     std::string ParseTemperature(std::string text)
