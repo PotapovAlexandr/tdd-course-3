@@ -147,9 +147,13 @@ public:
         {
             answer = (20 + 23 + 33 + 26)/4.;
         }
-        else
+        if( date == "01.09.2018")
         {
             answer = (19 + 22 + 31 + 24)/4.;
+        }
+        if( date == "02.09.2018")
+        {
+            answer = (21 + 25 + 34 + 27)/4. ;
         }
         return answer ;
     }
