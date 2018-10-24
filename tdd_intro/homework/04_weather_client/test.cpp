@@ -136,7 +136,15 @@ FakeServer g_fakeServer;
 
 std::string ParseTemperature(std::string text)
 {
-    return "21";
+    if (text == "21;181;5.1")
+    {
+        return "21";
+    }
+    if (text == "20;181;5.1")
+    {
+        return "20";
+    }
+    return "";
 }
 
 class WeatherClient: public IWeatherClient
