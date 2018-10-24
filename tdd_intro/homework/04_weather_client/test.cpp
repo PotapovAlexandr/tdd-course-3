@@ -136,8 +136,13 @@ FakeServer g_fakeServer;
 
 std::string ParseTemperature(std::string text)
 {
-    std::size_t pos = text.find(";");      // position of "live" in str
+    std::size_t pos = text.find(";");
     return text.substr (0, pos);
+}
+
+std::string ParseWindDir(std::string text)
+{
+    return "181";
 }
 
 class WeatherClient: public IWeatherClient
