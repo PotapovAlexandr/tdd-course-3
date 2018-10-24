@@ -134,7 +134,10 @@ private:
 
 FakeServer g_fakeServer;
 
-
+std::string ParseTemperature(std::string text)
+{
+    return "21";
+}
 
 class WeatherClient: public IWeatherClient
 {
@@ -202,5 +205,5 @@ TEST (Weather, AverageTemperature_02_09 )
 
 TEST (Weather, ParseTemp)
 {
-    ASSERT_EQ("21", ParceTemperature("20;181;5.1"));
+    ASSERT_EQ("21", ParseTemperature("20;181;5.1"));
 }
