@@ -155,7 +155,14 @@ public:
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 19;
+        if (date == "01.09.2018")
+        {
+            return 19;
+        }
+        if (date == "02.09.2018")
+        {
+            return 21;
+        }
     }
     double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
