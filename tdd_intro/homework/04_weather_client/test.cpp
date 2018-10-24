@@ -142,8 +142,16 @@ public:
 
     double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        std::string strAnswer =  GetTemperature(date);
-        return atof(strAnswer.c_str());
+        double answer = 0;
+        std::string at3 =  GetTemperatureAtTime(server, date, ";03:00");
+        std::string at9 =  GetTemperatureAtTime(server, date, ";09:00");
+        std::string at15 = GetTemperatureAtTime(server, date, ";15:00");
+        std::string at21 = GetTemperatureAtTime(server, date, ";21:00");
+        if (!at3.empty() && !at9.empty() && !at15.empty() && !at21.empty())
+        {
+            answer = ( atof(at3.c_str()) + atof(at9.c_str()) + atof(at15.c_str()) + atof(at21.c_str()) )/4;
+        }
+        return answer;
     }
     double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
@@ -162,22 +170,9 @@ public:
         return 0;
     }
 private:
-    std::string GetTemperature (const std::string& date)
+    std::string GetTemperatureAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
     {
-        std::string answer = "";
-        if( date == "31.08.2018")
-        {
-            answer = "25.5";
-        }
-        if( date == "01.09.2018")
-        {
-            answer = "24";
-        }
-        if( date == "02.09.2018")
-        {
-            answer = "26.75" ;
-        }
-        return answer ;
+        return server.GetWeather(date + time); ;
     }
 };
 
