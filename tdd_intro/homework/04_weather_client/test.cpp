@@ -224,3 +224,10 @@ TEST (Weather, AverageTemperature_02_09 )
     WeatherClient wClient;
     ASSERT_EQ(average, wClient.GetAverageTemperature(g_fakeServer, "02.09.2018"));
 }
+
+TEST (Weather, MinTemperature_01_09 )
+{
+    double min = 19;
+    WeatherClient wClient;
+    ASSERT_EQ(min, wClient.GetMinimumTemperature(g_fakeServer, "01.09.2018"));
+}
