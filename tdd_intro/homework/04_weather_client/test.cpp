@@ -147,6 +147,11 @@ std::string ParseWindDir(std::string text)
     return text.substr(startPos + 1, size);
 }
 
+std::string ParseWindSpeed(std::string text)
+{
+    return "5.1";
+}
+
 class WeatherClient: public IWeatherClient
 {
 public:
