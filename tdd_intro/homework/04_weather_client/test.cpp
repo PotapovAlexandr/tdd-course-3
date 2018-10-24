@@ -212,6 +212,18 @@ private:
             return ParseTemperature(response);
         }
     }
+    std::string GetWindAtTime (IWeatherServer& server, const std::string& date, const std::string& time)
+    {
+        std::string response = server.GetWeather(date + time);
+        if (response.empty())
+        {
+            return "";
+        }
+        else
+        {
+            return ParseWindDir(response);
+        }
+    }
     std::string ParseTemperature(std::string text)
     {
         std::size_t pos = text.find(";");
