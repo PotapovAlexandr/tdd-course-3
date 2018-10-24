@@ -250,3 +250,10 @@ TEST (Weather, MinTemperature_02_09 )
     WeatherClient wClient;
     ASSERT_EQ(min, wClient.GetMinimumTemperature(g_fakeServer, "02.09.2018"));
 }
+
+TEST (Weather, MaxTemperature_1_09 )
+{
+    double max = 31;
+    WeatherClient wClient;
+    ASSERT_EQ(max, wClient.GetMinimumTemperature(g_fakeServer, "02.09.2018"));
+}
