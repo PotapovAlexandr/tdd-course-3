@@ -5,7 +5,7 @@ last space should be used to wrapp this line. If there are no spaces - wrapp it 
 
 Example:
 When pos is specified, the search only includes sequences of characters that begin at or before position pos,
-ignoring any possible match beginning after pos
+ignoring any possible match beginning after pos.
 
 "When pos is specified, the",
 "search only includes sequences",
@@ -41,7 +41,7 @@ WrappedStrings WrapString(const std::string& str, size_t wrapLength)
             cur.pop_back();
         }
 
-        if(!cur.empty() && cur.front() == ' ')
+        while (!cur.empty() && cur.front() == ' ')
         {
             cur = cur.substr(1);
         }
