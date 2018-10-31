@@ -33,23 +33,36 @@ using WrappedStrings = std::vector<std::string>;
 WrappedStrings WrapString(const std::string& str, size_t wrapLength)
 {
     WrappedStrings result;
-    for(size_t i = 0; i < str.length(); i += wrapLength)
+
+    for(size_t i = 0; i < str.length(); )
     {
+        while(i < str.length() && str[i] == ' ')
+        {
+            ++i;
+        }
         std::string cur = str.substr(i, wrapLength);
+
+        if((i + wrapLength) < str.size() && str[i + wrapLength] != ' ' && str.find(' ') != std::string::npos)
+        {
+            size_t curLenth = wrapLength;
+            while(str[i+curLenth] != ' ')
+            {
+                --curLenth;
+                cur = str.substr(i, curLenth);
+            }
+        }
         while (!cur.empty() && cur.back() == ' ')
         {
             cur.pop_back();
         }
 
-        while (!cur.empty() && cur.front() == ' ')
-        {
-            cur = cur.substr(1);
-        }
+
 
         if(!cur.empty())
         {
             result.push_back(cur);
         }
+        i+=cur.size();
     }
 
     return result;
@@ -109,7 +122,7 @@ TEST(WrapString, StringWrappedWithSeveralWhitespaceInBegin)
 
 TEST(WrapString, StringLongerThanWrappedWithWhitespace)
 {
-    WrappedStrings expected = {"12", "3456"};
-    ASSERT_EQ(expected, WrapString("12 3456", 4));
+    WrappedStrings expected = {"12", "34"};
+    ASSERT_EQ(expected, WrapString("12 34", 4));
 }
 
