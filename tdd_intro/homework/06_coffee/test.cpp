@@ -73,11 +73,7 @@ public:
         }
         case Cappuccino:
         {
-            m_source.AddCoffee(cup/4);
-            m_source.SetCupSize(cup);
-            m_source.AddWater(cup/4, 80);
-            m_source.AddMilk(cup/4);
-            m_source.AddMilkFoam(cup/4);
+            MakeCappuccino(cup);
             break;
         }
         case Latte:
@@ -107,6 +103,14 @@ private:
         m_source.AddCoffee(cupSize/3);
         m_source.SetCupSize(cupSize);
         m_source.AddWater((cupSize/3)*2, 60);
+    }
+    void MakeCappuccino(int cupSize)
+    {
+        m_source.AddCoffee(cupSize/4);
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater(cupSize/4, 80);
+        m_source.AddMilk(cupSize/4);
+        m_source.AddMilkFoam(cupSize/4);
     }
 private:
     ISourceOfIngredients& m_source;
