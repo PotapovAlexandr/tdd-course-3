@@ -199,3 +199,17 @@ TEST(CoffeeMachine, Marochino100ml)
 
     cm.CreateCoffee(Cup::Normal, Coffee::Marochino);
 }
+
+//- americano: water & coffee 1:3 Water temp 60C
+//  cup size = 140 ml: 140/3 = 46 coffee + 92 water with 60C
+TEST(CoffeeMachine, Americano140ml)
+{
+    MockSourceOfIngredients si;
+    CoffeeMachine cm(si);
+
+    EXPECT_CALL(si, AddCoffee(46)).Times(1);
+    EXPECT_CALL(si, SetCupSize(140)).Times(1);
+    EXPECT_CALL(si, AddWater(92, 60)).Times(1);
+
+    cm.CreateCoffee(Cup::Big, Coffee::Americano);
+}
