@@ -78,19 +78,12 @@ public:
         }
         case Latte:
         {
-            m_source.AddCoffee(cup/2);
-            m_source.SetCupSize(cup);
-            m_source.AddWater(cup/4, 90);
-            m_source.AddMilk(cup/8);
-            m_source.AddMilkFoam(cup/8);
+            MakeLatte(cup);
             break;
         }
         case Marochino:
         {
-            m_source.AddCoffee(cup/4);
-            m_source.SetCupSize(cup);
-            m_source.AddMilk(cup/4);
-            m_source.AddMilkFoam(cup/4);
+            MakeMarochino(cup);
             break;
         }
         default:
@@ -109,6 +102,21 @@ private:
         m_source.AddCoffee(cupSize/4);
         m_source.SetCupSize(cupSize);
         m_source.AddWater(cupSize/4, 80);
+        m_source.AddMilk(cupSize/4);
+        m_source.AddMilkFoam(cupSize/4);
+    }
+    void MakeLatte(int cupSize)
+    {
+        m_source.AddCoffee(cupSize/2);
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater(cupSize/4, 90);
+        m_source.AddMilk(cupSize/8);
+        m_source.AddMilkFoam(cupSize/8);
+    }
+    void MakeMarochino(int cupSize)
+    {
+        m_source.AddCoffee(cupSize/4);
+        m_source.SetCupSize(cupSize);
         m_source.AddMilk(cupSize/4);
         m_source.AddMilkFoam(cupSize/4);
     }
