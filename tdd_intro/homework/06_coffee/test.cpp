@@ -245,3 +245,18 @@ TEST(CoffeeMachine, Latte140ml)
 
     cm.CreateCoffee(Cup::Big, Coffee::Latte);
 }
+
+// - marochino - chocolate & coffee & milk foam, 1:4, 1:4, 1:4 and 1:4 is empty
+// cup size = 140 ml: 35 chocolate + 35 coffee + 35 milk foam
+TEST(CoffeeMachine, Marochino140ml)
+{
+    MockSourceOfIngredients si;
+    CoffeeMachine cm(si);
+
+    EXPECT_CALL(si, AddCoffee(35)).Times(1);
+    EXPECT_CALL(si, SetCupSize(140)).Times(1);
+    EXPECT_CALL(si, AddMilk(35)).Times(1);
+    EXPECT_CALL(si, AddMilkFoam(35)).Times(1);
+
+    cm.CreateCoffee(Cup::Big, Coffee::Marochino);
+}
