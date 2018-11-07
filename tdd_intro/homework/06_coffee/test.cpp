@@ -63,9 +63,26 @@ public:
     }
     void CreateCoffee(const Cup cup, const Coffee coffee)
     {
-        m_source.AddCoffee(75);
-        m_source.SetCupSize(cup);
-        m_source.AddWater(25, 60);
+        switch (coffee) {
+        case Americano:
+        {
+            m_source.AddCoffee(75);
+            m_source.SetCupSize(cup);
+            m_source.AddWater(25, 60);
+            break;
+        }
+        case Cappuccino:
+        {
+            m_source.AddCoffee(25);
+            m_source.SetCupSize(cup);
+            m_source.AddWater(25, 80);
+            m_source.AddMilk(25);
+            m_source.AddMilkFoam(25);
+            break;
+        }
+        default:
+            break;
+        }
     }
 private:
     ISourceOfIngredients& m_source;
