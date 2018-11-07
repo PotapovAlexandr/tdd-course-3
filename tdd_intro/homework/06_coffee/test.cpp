@@ -75,11 +75,11 @@ public:
         }
         case Cappuccino:
         {
-            m_source.AddCoffee(25);
+            m_source.AddCoffee(cup/4);
             m_source.SetCupSize(cup);
-            m_source.AddWater(25, 80);
-            m_source.AddMilk(25);
-            m_source.AddMilkFoam(25);
+            m_source.AddWater(cup/4, 80);
+            m_source.AddMilk(cup/4);
+            m_source.AddMilkFoam(cup/4);
             break;
         }
         case Latte:
@@ -222,7 +222,7 @@ TEST(CoffeeMachine, Cappuccino140ml)
     CoffeeMachine cm(si);
 
     EXPECT_CALL(si, AddCoffee(35)).Times(1);
-    EXPECT_CALL(si, SetCupSize(100)).Times(1);
+    EXPECT_CALL(si, SetCupSize(140)).Times(1);
     EXPECT_CALL(si, AddWater(35, 80)).Times(1);
     EXPECT_CALL(si, AddMilk(35)).Times(1);
     EXPECT_CALL(si, AddMilkFoam(35)).Times(1);
