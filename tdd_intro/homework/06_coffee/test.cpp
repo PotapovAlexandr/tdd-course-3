@@ -84,11 +84,11 @@ public:
         }
         case Latte:
         {
-            m_source.AddCoffee(25);
+            m_source.AddCoffee(cup/2);
             m_source.SetCupSize(cup);
-            m_source.AddWater(25, 90);
-            m_source.AddMilk(12);
-            m_source.AddMilkFoam(12);
+            m_source.AddWater(cup/4, 90);
+            m_source.AddMilk(cup/8);
+            m_source.AddMilkFoam(cup/8);
             break;
         }
         case Marochino:
@@ -238,10 +238,10 @@ TEST(CoffeeMachine, Latte140ml)
     CoffeeMachine cm(si);
 
     EXPECT_CALL(si, AddCoffee(70)).Times(1);
-    EXPECT_CALL(si, SetCupSize(100)).Times(1);
+    EXPECT_CALL(si, SetCupSize(140)).Times(1);
     EXPECT_CALL(si, AddWater(35, 90)).Times(1);
     EXPECT_CALL(si, AddMilk(17)).Times(1);
     EXPECT_CALL(si, AddMilkFoam(17)).Times(1);
 
-    cm.CreateCoffee(Cup::Normal, Coffee::Latte);
+    cm.CreateCoffee(Cup::Big, Coffee::Latte);
 }
