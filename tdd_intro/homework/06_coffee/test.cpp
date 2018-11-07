@@ -31,8 +31,8 @@ public:
 
 enum Cup
 {
-    Normal,
-    Big
+    Normal = 100,
+    Big = 140
 };
 
 enum Coffee
@@ -62,9 +62,9 @@ public:
     }
     void CreateCoffee(const Cup cup, const Coffee coffee)
     {
-        m_source.AddCoffee(0);
-        m_source.SetCupSize(0);
-        m_source.AddWater(0, 0);
+        m_source.AddCoffee(75);
+        m_source.SetCupSize(cup);
+        m_source.AddWater(25, 60);
     }
 private:
     ISourceOfIngredients& m_source;
@@ -103,6 +103,7 @@ TEST(CoffeeMachine, CallsImportantThings)
 }
 
 //- americano: water & coffee 1:3 Water temp 60C
+//  cup size = 100 ml: 25 coffee + 75 water with 60C
 TEST(CoffeeMachine, Americano)
 {
     MockSourceOfIngredients si;
