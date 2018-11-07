@@ -91,6 +91,14 @@ public:
             m_source.AddMilkFoam(12);
             break;
         }
+        case Marochino:
+        {
+            m_source.AddCoffee(25);
+            m_source.SetCupSize(cup);
+            m_source.AddMilk(25);
+            m_source.AddMilkFoam(25);
+            break;
+        }
         default:
             break;
         }
