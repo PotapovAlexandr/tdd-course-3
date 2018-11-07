@@ -39,7 +39,8 @@ enum Coffee
 {
     Americano,
     Cappuccino,
-    Latte
+    Latte,
+    Marochino
 };
 
 class MockSourceOfIngredients : public ISourceOfIngredients
@@ -67,9 +68,9 @@ public:
         switch (coffee) {
         case Americano:
         {
-            m_source.AddCoffee(75);
+            m_source.AddCoffee(25);
             m_source.SetCupSize(cup);
-            m_source.AddWater(25, 60);
+            m_source.AddWater(75, 60);
             break;
         }
         case Cappuccino:
@@ -137,9 +138,9 @@ TEST(CoffeeMachine, Americano100ml)
     MockSourceOfIngredients si;
     CoffeeMachine cm(si);
 
-    EXPECT_CALL(si, AddCoffee(75)).Times(1);
+    EXPECT_CALL(si, AddCoffee(25)).Times(1);
     EXPECT_CALL(si, SetCupSize(100)).Times(1);
-    EXPECT_CALL(si, AddWater(25, 60)).Times(1);
+    EXPECT_CALL(si, AddWater(75, 60)).Times(1);
 
     cm.CreateCoffee(Cup::Normal, Coffee::Americano);
 }
@@ -174,4 +175,19 @@ TEST(CoffeeMachine, Latte100ml)
     EXPECT_CALL(si, AddMilkFoam(12)).Times(1);
 
     cm.CreateCoffee(Cup::Normal, Coffee::Latte);
+}
+
+// - marochino - chocolate & coffee & milk foam, 1:4, 1:4, 1:4 and 1:4 is empty
+// cup size = 100 ml: 25 chocolate + 25 coffee + 25 milk foam
+TEST(CoffeeMachine, Marochino100ml)
+{
+    MockSourceOfIngredients si;
+    CoffeeMachine cm(si);
+
+    EXPECT_CALL(si, AddCoffee(25)).Times(1);
+    EXPECT_CALL(si, SetCupSize(100)).Times(1);
+    EXPECT_CALL(si, AddMilk(25)).Times(1);
+    EXPECT_CALL(si, AddMilkFoam(25)).Times(1);
+
+    cm.CreateCoffee(Cup::Normal, Coffee::Marochino);
 }
