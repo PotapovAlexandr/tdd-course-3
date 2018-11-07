@@ -68,9 +68,7 @@ public:
         switch (coffee) {
         case Americano:
         {
-            m_source.AddCoffee(cup/3);
-            m_source.SetCupSize(cup);
-            m_source.AddWater((cup/3)*2, 60);
+            MakeAmericano(cup);
             break;
         }
         case Cappuccino:
@@ -102,6 +100,13 @@ public:
         default:
             break;
         }
+    }
+private:
+    void MakeAmericano(int cupSize)
+    {
+        m_source.AddCoffee(cupSize/3);
+        m_source.SetCupSize(cupSize);
+        m_source.AddWater((cupSize/3)*2, 60);
     }
 private:
     ISourceOfIngredients& m_source;
