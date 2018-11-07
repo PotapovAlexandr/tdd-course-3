@@ -68,9 +68,9 @@ public:
         switch (coffee) {
         case Americano:
         {
-            m_source.AddCoffee(25);
+            m_source.AddCoffee(cup/3);
             m_source.SetCupSize(cup);
-            m_source.AddWater(75, 60);
+            m_source.AddWater((cup/3)*2, 60);
             break;
         }
         case Cappuccino:
@@ -140,15 +140,15 @@ TEST(CoffeeMachine, CallsImportantThings)
 }
 
 //- americano: water & coffee 1:3 Water temp 60C
-//  cup size = 100 ml: 25 coffee + 75 water with 60C
+//  cup size = 100 ml: 33 coffee + 66 water with 60C
 TEST(CoffeeMachine, Americano100ml)
 {
     MockSourceOfIngredients si;
     CoffeeMachine cm(si);
 
-    EXPECT_CALL(si, AddCoffee(25)).Times(1);
+    EXPECT_CALL(si, AddCoffee(33)).Times(1);
     EXPECT_CALL(si, SetCupSize(100)).Times(1);
-    EXPECT_CALL(si, AddWater(75, 60)).Times(1);
+    EXPECT_CALL(si, AddWater(66, 60)).Times(1);
 
     cm.CreateCoffee(Cup::Normal, Coffee::Americano);
 }
