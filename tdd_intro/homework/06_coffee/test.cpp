@@ -87,7 +87,7 @@ public:
             m_source.AddCoffee(25);
             m_source.SetCupSize(cup);
             m_source.AddWater(25, 90);
-            m_source.AddMilk(13);
+            m_source.AddMilk(12);
             m_source.AddMilkFoam(12);
             break;
         }
