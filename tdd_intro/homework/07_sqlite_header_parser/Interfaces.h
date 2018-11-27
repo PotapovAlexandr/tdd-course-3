@@ -63,4 +63,5 @@ public:
 //    72	20	Reserved for expansion. Must be zero.
     virtual int GetVersionValidNumber() = 0;
     virtual int GetSqliteVersionNumber() = 0;
+    virtual bool IsEmpty() = 0;
 };

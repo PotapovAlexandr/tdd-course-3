@@ -42,13 +42,13 @@ Offset	Size	Description
 #include <gmock/gmock.h>
 
 #include "Mocks.h"
-
+using namespace testing;
 
 
 
 void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
 {
-    if (gui == nullptr)
+    if (gui == nullptr || dbReader->IsEmpty())
     {
         throw std::exception();
     }
@@ -58,4 +58,12 @@ TEST(SqliteHeaderReader, NoGui)
 {
     DbReaderMock dbReader;
     ASSERT_THROW(DysplayHeaderStructure(nullptr, &dbReader), std::exception);
+}
+
+TEST(SqliteHeaderReader, EmptyReader)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(true));
+    ASSERT_THROW(DysplayHeaderStructure(&gui, &dbReader), std::exception);
 }

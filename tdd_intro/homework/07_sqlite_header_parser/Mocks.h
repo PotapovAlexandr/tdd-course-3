@@ -8,10 +8,10 @@ class GuiMock: public IGui
 {
 public:
     ~GuiMock(){}
-    MOCK_METHOD0(DisplayHeader, void());
+    MOCK_METHOD1(DisplayHeader, void(const SqliteHeader& header));
 };
 
-class DbReaderMock:public IDbReader
+class DbReaderMock: public IDbReader
 {
 public:
     ~DbReaderMock(){}
@@ -40,4 +40,5 @@ public:
 //    72	20	Reserved for expansion. Must be zero.
     MOCK_METHOD0(GetVersionValidNumber, int());
     MOCK_METHOD0(GetSqliteVersionNumber, int());
+    MOCK_METHOD0(IsEmpty, bool());
 };
