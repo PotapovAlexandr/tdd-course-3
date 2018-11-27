@@ -48,6 +48,14 @@ Offset	Size	Description
 
 void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
 {
-
+    if (gui == nullptr)
+    {
+        throw std::exception();
+    }
 }
 
+TEST(SqliteHeaderReader, NoGui)
+{
+    DbReaderMock *dbReader;
+    ASSERT_THROW(DysplayHeaderStructure(nullptr, dbReader), std::exception);
+}
