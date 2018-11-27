@@ -32,7 +32,7 @@ Offset	Size	Description
 /*
  * Read file that not exist
  * Read file that have header less than 100
- * Read file with normal first 16 bit
+ * Read file with normal first 16 byte
  * ... read another parameters
  *
  *
@@ -48,7 +48,7 @@ using namespace testing;
 
 void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
 {
-    if (gui == nullptr || dbReader->IsEmpty())
+    if (gui == nullptr || dbReader->IsEmpty() || !dbReader->CheckHeader())
     {
         throw std::exception();
     }
@@ -64,6 +64,19 @@ TEST(SqliteHeaderReader, EmptyReader)
 {
     DbReaderMock dbReader;
     GuiMock gui;
+
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(true));
+    ASSERT_THROW(DysplayHeaderStructure(&gui, &dbReader), std::exception);
+}
+
+TEST(SqliteHeaderReader, ReadFileLessThan100Byte)
+{
+    DbReaderMock dbReader;
+    EXPECT_CALL(dbReader, ReadFilePath("somePath")).WillOnce(Return(true));
+    dbReader.ReadFilePath("somePath");
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(false));
     ASSERT_THROW(DysplayHeaderStructure(&gui, &dbReader), std::exception);
 }
