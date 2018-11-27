@@ -56,6 +56,6 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
 
 TEST(SqliteHeaderReader, NoGui)
 {
-    DbReaderMock *dbReader;
-    ASSERT_THROW(DysplayHeaderStructure(nullptr, dbReader), std::exception);
+    DbReaderMock dbReader;
+    ASSERT_THROW(DysplayHeaderStructure(nullptr, &dbReader), std::exception);
 }
