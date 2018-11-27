@@ -7,3 +7,6 @@ CONFIG -= qt
 
 SOURCES += \
     test.cpp
+HEADERS += \
+    Interfaces.h\
+    Mocks.h
