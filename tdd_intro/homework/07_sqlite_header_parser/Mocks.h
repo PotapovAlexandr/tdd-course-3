@@ -8,19 +8,19 @@ class GuiMock: public IGui
 {
 public:
     ~GuiMock(){}
-    MOCK_METHOD1(DisplayHeader, void(const SqliteHeader& header));
+    MOCK_METHOD1(DisplayHeader, void(const std::vector<std::string>& header));
 };
 
 class DbReaderMock: public IDbReader
 {
 public:
     ~DbReaderMock(){}
-
-    MOCK_METHOD1(ReadFilePath, bool(const std::string filePath));
+    MOCK_METHOD1(ReadFilePath, bool(const std::string& filePath));
     MOCK_METHOD0(CheckHeader, bool());
     MOCK_METHOD0(GetHeaderString, std::string());
     MOCK_METHOD0(GetPageSize, int());
-    MOCK_METHOD0(GetFormatWriteVersion, bool());
+    MOCK_METHOD0(GetFormatWriteVersion, int());
+    MOCK_METHOD0(GetFormatReadVersion, int());
     MOCK_METHOD0(GetUnsedBytes, int());
     MOCK_METHOD0(GetMaximumEmbeddedPayloadFraction, int());
     MOCK_METHOD0(GetMinimumEmbeddedPayloadFraction, int());

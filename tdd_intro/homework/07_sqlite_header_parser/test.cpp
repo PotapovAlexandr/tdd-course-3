@@ -44,6 +44,29 @@ Offset	Size	Description
 #include "Mocks.h"
 using namespace testing;
 
+const SqliteHeader g_testHeader{"SQLite format 3",
+                        512,
+                        1,
+                        1,
+                        0,
+                        64,
+                        32,
+                        32,
+                        1,
+                        30,
+                        20,
+                        5,
+                    //    40	4	The schema cookie.
+                        1,
+                        32,
+                        0,
+                        1,
+                        2,
+                        0,
+                        33,
+                    //    72	20	Reserved for expansion. Must be zero.
+                        3,
+                        22};
 
 
 void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
@@ -52,6 +75,9 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     {
         throw std::exception();
     }
+    std::vector<std::string> messagesForOutput;
+    messagesForOutput.push_back("Type - " + dbReader->GetHeaderString());
+    //gui->DisplayHeader(messagesForOutput);
 }
 
 TEST(SqliteHeaderReader, NoGui)
@@ -79,4 +105,20 @@ TEST(SqliteHeaderReader, ReadFileLessThan100Byte)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(false));
     ASSERT_THROW(DysplayHeaderStructure(&gui, &dbReader), std::exception);
+}
+
+TEST(SqliteHeaderReader, ReadHeadString)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+    std::string headerString = "Type - SQLite format 3";
+    std::vector<std::string> expectedData;
+    expectedData.push_back(headerString);
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetHeaderString()).WillOnce(Return(g_testHeader.head));
+    EXPECT_CALL(gui, DisplayHeader(expectedData)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
 }

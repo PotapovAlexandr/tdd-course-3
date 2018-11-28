@@ -1,12 +1,14 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 struct SqliteHeader
 {
     std::string head;
     int pageSize;
-    bool fileFormatWriteVersion;
+    int fileFormatWriteVersion;
+    int fileFormatReadVersion;
     int bytesOfUnused;
     int maximumEmbeddedPayloadFraction;
     int minimumEmbeddedPayloadFraction;
@@ -32,18 +34,19 @@ class IGui
 {
 public:
     virtual ~IGui(){}
-    virtual void DisplayHeader(const SqliteHeader& header) = 0;
+    virtual void DisplayHeader(const std::vector<std::string>& header) = 0;
 };
 
 class IDbReader
 {
 public:
     virtual ~IDbReader(){}
-    virtual bool ReadFilePath(const std::string filePath) = 0;
+    virtual bool ReadFilePath(const std::string& filePath) = 0;
     virtual bool CheckHeader() = 0;
     virtual std::string GetHeaderString() = 0;
     virtual int GetPageSize() = 0;
-    virtual bool GetFormatWriteVersion() = 0;
+    virtual int GetFormatWriteVersion() = 0;
+    virtual int GetFormatReadVersion() = 0;
     virtual int GetUnsedBytes() = 0;
     virtual int GetMaximumEmbeddedPayloadFraction() = 0;
     virtual int GetMinimumEmbeddedPayloadFraction() = 0;
