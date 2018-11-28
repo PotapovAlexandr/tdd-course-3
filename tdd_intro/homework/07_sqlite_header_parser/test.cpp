@@ -78,6 +78,7 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     std::vector<std::string> messagesForOutput;
     messagesForOutput.push_back("Type - " + dbReader->GetHeaderString());
     messagesForOutput.push_back("DB page size - " + std::to_string(dbReader->GetPageSize()));
+    messagesForOutput.push_back("File format write version - " + std::to_string(dbReader->GetFormatWriteVersion()));
     gui->DisplayHeader(messagesForOutput);
 }
 
@@ -131,6 +132,19 @@ TEST(SqliteHeaderReader, ReadDbPageSize)
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetPageSize()).WillOnce(Return(g_testHeader.pageSize));
 
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadFileWriteFormatVersion)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetFormatWriteVersion()).WillOnce(Return(g_testHeader.fileFormatWriteVersion));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
