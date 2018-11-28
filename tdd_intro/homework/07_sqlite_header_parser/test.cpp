@@ -80,6 +80,7 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     messagesForOutput.push_back("DB page size - " + std::to_string(dbReader->GetPageSize()));
     messagesForOutput.push_back("File format write version - " + std::to_string(dbReader->GetFormatWriteVersion()));
     messagesForOutput.push_back("File format read version - " + std::to_string(dbReader->GetFormatReadVersion()));
+    messagesForOutput.push_back("Unused bytes - " + std::to_string(dbReader->GetUnsedBytes()));
     gui->DisplayHeader(messagesForOutput);
 }
 
@@ -159,6 +160,19 @@ TEST(SqliteHeaderReader, ReadFileReadFormatVersion)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetFormatReadVersion()).WillOnce(Return(g_testHeader.fileFormatReadVersion));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadUnusedBytes)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetFormatReadVersion()).WillOnce(Return(g_testHeader.bytesOfUnused));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
