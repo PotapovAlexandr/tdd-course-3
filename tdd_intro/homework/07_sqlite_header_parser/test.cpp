@@ -83,6 +83,8 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     messagesForOutput.push_back("Unused bytes - " + std::to_string(dbReader->GetUnsedBytes()));
     messagesForOutput.push_back("Maximum embedded payload fraction - " + std::to_string(dbReader->GetMaximumEmbeddedPayloadFraction()));
     messagesForOutput.push_back("Minimum embedded payload fraction - " + std::to_string(dbReader->GetMinimumEmbeddedPayloadFraction()));
+    messagesForOutput.push_back("Leaf payload fraction - " + std::to_string(dbReader->GetLeafPayloadFraction()));
+
     gui->DisplayHeader(messagesForOutput);
 }
 
@@ -201,6 +203,19 @@ TEST(SqliteHeaderReader, ReadMinimumEmbeddedPayloadFraction)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetMinimumEmbeddedPayloadFraction()).WillOnce(Return(g_testHeader.minimumEmbeddedPayloadFraction));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadLeafPayloadFraction)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetLeafPayloadFraction()).WillOnce(Return(g_testHeader.leafPayloadFraction));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
