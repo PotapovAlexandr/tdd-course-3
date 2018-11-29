@@ -86,6 +86,8 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     messagesForOutput.push_back("Leaf payload fraction - " + std::to_string(dbReader->GetLeafPayloadFraction()));
     messagesForOutput.push_back("File change counter - " + std::to_string(dbReader->GetFileChangeCounter()));
     messagesForOutput.push_back("Size of the database file in pages - " + std::to_string(dbReader->GetPageCount()));
+    messagesForOutput.push_back("Page number of the first freelist trunk page - " + std::to_string(dbReader->GetFirstFreelistPage()));
+
 
     gui->DisplayHeader(messagesForOutput);
 }
@@ -244,6 +246,19 @@ TEST(SqliteHeaderReader, ReadPageCount)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetPageCount()).WillOnce(Return(g_testHeader.pageCount));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadFirstFreelistPage)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetFirstFreelistPage()).WillOnce(Return(g_testHeader.firstFreelistPage));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
