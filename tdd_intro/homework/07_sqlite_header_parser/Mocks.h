@@ -35,7 +35,7 @@ public:
     MOCK_METHOD0(GetNumberOfLargestRootPage, int());
     MOCK_METHOD0(GetDatabaseTextEncoding, int());
     MOCK_METHOD0(GetUserVersion, int());
-    MOCK_METHOD0(GetIncrementalVacuumMode, bool());
+    MOCK_METHOD0(GetIncrementalVacuumMode, int());
     MOCK_METHOD0(GetApplicationId, int());
 //    72	20	Reserved for expansion. Must be zero.
     MOCK_METHOD0(GetVersionValidNumber, int());

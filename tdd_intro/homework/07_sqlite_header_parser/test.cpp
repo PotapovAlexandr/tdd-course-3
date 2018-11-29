@@ -87,6 +87,13 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     messagesForOutput.push_back("File change counter - " + std::to_string(dbReader->GetFileChangeCounter()));
     messagesForOutput.push_back("Size of the database file in pages - " + std::to_string(dbReader->GetPageCount()));
     messagesForOutput.push_back("Page number of the first freelist trunk page - " + std::to_string(dbReader->GetFirstFreelistPage()));
+    messagesForOutput.push_back("Total number of freelist pages - " + std::to_string(dbReader->GetFreelistPageCount()));
+    messagesForOutput.push_back("The schema format number - " + std::to_string(dbReader->GetSchemaFormat()));
+    messagesForOutput.push_back("Default page cache size - " + std::to_string(dbReader->GetDefaultPageCacheSize()));
+    messagesForOutput.push_back("The page number of the largest root b-tree page - " + std::to_string(dbReader->GetNumberOfLargestRootPage()));
+    messagesForOutput.push_back("The database text encoding - " + std::to_string(dbReader->GetDatabaseTextEncoding()));
+    messagesForOutput.push_back("The \"user version\" - " + std::to_string(dbReader->GetUserVersion()));
+    messagesForOutput.push_back("The vacuum mode - " + std::to_string(dbReader->GetIncrementalVacuumMode()));
 
 
     gui->DisplayHeader(messagesForOutput);
@@ -259,6 +266,97 @@ TEST(SqliteHeaderReader, ReadFirstFreelistPage)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetFirstFreelistPage()).WillOnce(Return(g_testHeader.firstFreelistPage));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadFreelistPageCount)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetFreelistPageCount()).WillOnce(Return(g_testHeader.freelistPageCount));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadSchemaFormat)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetSchemaFormat()).WillOnce(Return(g_testHeader.schemaFormat));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadDefaultPageCacheSize)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetDefaultPageCacheSize()).WillOnce(Return(g_testHeader.defaultPageCacheSize));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadNumberOfLargestRootPage)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetNumberOfLargestRootPage()).WillOnce(Return(g_testHeader.numberOfLargestRootPage));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadDatabaseTextEncoding)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetDatabaseTextEncoding()).WillOnce(Return(g_testHeader.databaseTextEncoding));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadUserVersion)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetUserVersion()).WillOnce(Return(g_testHeader.userVersion));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadIncrementalVacuumMode)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetIncrementalVacuumMode()).WillOnce(Return(g_testHeader.incrementalVacuumMode));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));

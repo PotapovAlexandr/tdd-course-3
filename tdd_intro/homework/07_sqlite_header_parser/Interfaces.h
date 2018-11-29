@@ -23,7 +23,7 @@ struct SqliteHeader
     int numberOfLargestRootPage;
     int databaseTextEncoding; // A value of 1 means UTF-8. A value of 2 means UTF-16le. A value of 3 means UTF-16be.
     int userVersion;
-    bool incrementalVacuumMode;
+    int incrementalVacuumMode;
     int applicationId;
 //    72	20	Reserved for expansion. Must be zero.
     int versionValidNumber;
@@ -61,7 +61,7 @@ public:
     virtual int GetNumberOfLargestRootPage() = 0;
     virtual int GetDatabaseTextEncoding() = 0; // A value of 1 means UTF-8. A value of 2 means UTF-16le. A value of 3 means UTF-16be.
     virtual int GetUserVersion() = 0;
-    virtual bool GetIncrementalVacuumMode() = 0;
+    virtual int GetIncrementalVacuumMode() = 0;
     virtual int GetApplicationId() = 0;
 //    72	20	Reserved for expansion. Must be zero.
     virtual int GetVersionValidNumber() = 0;
