@@ -94,7 +94,9 @@ void DysplayHeaderStructure(IGui* gui, IDbReader* dbReader)
     messagesForOutput.push_back("The database text encoding - " + std::to_string(dbReader->GetDatabaseTextEncoding()));
     messagesForOutput.push_back("The \"user version\" - " + std::to_string(dbReader->GetUserVersion()));
     messagesForOutput.push_back("The vacuum mode - " + std::to_string(dbReader->GetIncrementalVacuumMode()));
-
+    messagesForOutput.push_back("The \"Application ID\" - " + std::to_string(dbReader->GetApplicationId()));
+    messagesForOutput.push_back("The version-valid-for number - " + std::to_string(dbReader->GetVersionValidNumber()));
+    messagesForOutput.push_back("The SQLITE_VERSION_NUMBER - " + std::to_string(dbReader->GetSqliteVersionNumber()));
 
     gui->DisplayHeader(messagesForOutput);
 }
@@ -357,6 +359,45 @@ TEST(SqliteHeaderReader, ReadIncrementalVacuumMode)
     EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
     EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
     EXPECT_CALL(dbReader, GetIncrementalVacuumMode()).WillOnce(Return(g_testHeader.incrementalVacuumMode));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadApplicationId)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetApplicationId()).WillOnce(Return(g_testHeader.applicationId));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadVersionValidNumber)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetVersionValidNumber()).WillOnce(Return(g_testHeader.versionValidNumber));
+    EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
+
+TEST(SqliteHeaderReader, ReadSqliteVersionNumber)
+{
+    DbReaderMock dbReader;
+    GuiMock gui;
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetSqliteVersionNumber()).WillOnce(Return(g_testHeader.sqliteVersionNumber));
     EXPECT_CALL(gui, DisplayHeader(_)).Times(1);
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
