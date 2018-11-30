@@ -402,3 +402,62 @@ TEST(SqliteHeaderReader, ReadSqliteVersionNumber)
 
     ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
 }
+
+TEST(SqliteHeaderReader, SummaryTest)
+{
+    DbReaderMock dbReader;
+    EXPECT_CALL(dbReader, ReadFilePath("somePath")).WillOnce(Return(true));
+    dbReader.ReadFilePath("somePath");
+    GuiMock gui;
+
+    std::vector<std::string> expectedData{
+                std::string("Type - SQLite format 3"),
+                std::string("DB page size - 512"),
+                std::string("File format write version - 1"),
+                std::string("File format read version - 1"),
+                std::string("Unused bytes - 0"),
+                std::string("Maximum embedded payload fraction - 64"),
+                std::string("Minimum embedded payload fraction - 32"),
+                std::string("Leaf payload fraction - 32"),
+                std::string("File change counter - 1"),
+                std::string("Size of the database file in pages - 30"),
+                std::string("Page number of the first freelist trunk page - 20"),
+                std::string("Total number of freelist pages - 5"),
+                std::string("The schema format number - 1"),
+                std::string("Default page cache size - 32"),
+                std::string("The page number of the largest root b-tree page - 0"),
+                std::string("The database text encoding - 1"),
+                std::string("The \"user version\" - 2"),
+                std::string("The vacuum mode - 0"),
+                std::string("The \"Application ID\" - 33"),
+                std::string("The version-valid-for number - 3"),
+                std::string("The SQLITE_VERSION_NUMBER - 22")};
+
+    EXPECT_CALL(dbReader, IsEmpty()).WillOnce(Return(false));
+    EXPECT_CALL(dbReader, CheckHeader()).WillOnce(Return(true));
+    EXPECT_CALL(dbReader, GetHeaderString()).WillOnce(Return(g_testHeader.head));
+    EXPECT_CALL(dbReader, GetPageSize()).WillOnce(Return(g_testHeader.pageSize));
+    EXPECT_CALL(dbReader, GetFormatWriteVersion()).WillOnce(Return(g_testHeader.fileFormatWriteVersion));
+    EXPECT_CALL(dbReader, GetFormatReadVersion()).WillOnce(Return(g_testHeader.fileFormatReadVersion));
+    EXPECT_CALL(dbReader, GetFormatReadVersion()).WillOnce(Return(g_testHeader.bytesOfUnused));
+    EXPECT_CALL(dbReader, GetMaximumEmbeddedPayloadFraction()).WillOnce(Return(g_testHeader.maximumEmbeddedPayloadFraction));
+    EXPECT_CALL(dbReader, GetMinimumEmbeddedPayloadFraction()).WillOnce(Return(g_testHeader.minimumEmbeddedPayloadFraction));
+    EXPECT_CALL(dbReader, GetLeafPayloadFraction()).WillOnce(Return(g_testHeader.leafPayloadFraction));
+    EXPECT_CALL(dbReader, GetFileChangeCounter()).WillOnce(Return(g_testHeader.fileChangeCounter));
+    EXPECT_CALL(dbReader, GetPageCount()).WillOnce(Return(g_testHeader.pageCount));
+    EXPECT_CALL(dbReader, GetFirstFreelistPage()).WillOnce(Return(g_testHeader.firstFreelistPage));
+    EXPECT_CALL(dbReader, GetFreelistPageCount()).WillOnce(Return(g_testHeader.freelistPageCount));
+    EXPECT_CALL(dbReader, GetSchemaFormat()).WillOnce(Return(g_testHeader.schemaFormat));
+    EXPECT_CALL(dbReader, GetDefaultPageCacheSize()).WillOnce(Return(g_testHeader.defaultPageCacheSize));
+    EXPECT_CALL(dbReader, GetNumberOfLargestRootPage()).WillOnce(Return(g_testHeader.numberOfLargestRootPage));
+    EXPECT_CALL(dbReader, GetDatabaseTextEncoding()).WillOnce(Return(g_testHeader.databaseTextEncoding));
+    EXPECT_CALL(dbReader, GetUserVersion()).WillOnce(Return(g_testHeader.userVersion));
+    EXPECT_CALL(dbReader, GetIncrementalVacuumMode()).WillOnce(Return(g_testHeader.incrementalVacuumMode));
+    EXPECT_CALL(dbReader, GetApplicationId()).WillOnce(Return(g_testHeader.applicationId));
+    EXPECT_CALL(dbReader, GetVersionValidNumber()).WillOnce(Return(g_testHeader.versionValidNumber));
+    EXPECT_CALL(dbReader, GetSqliteVersionNumber()).WillOnce(Return(g_testHeader.sqliteVersionNumber));
+
+    EXPECT_CALL(gui, DisplayHeader(expectedData)).Times(1);
+
+    ASSERT_NO_THROW(DysplayHeaderStructure(&gui, &dbReader));
+}
